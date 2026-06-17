@@ -1,0 +1,2 @@
+# kantan_interactive_video
+簡単に選択式で動画を切り替えるサンプルプログラム
