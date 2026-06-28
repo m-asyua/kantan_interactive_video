@@ -7,9 +7,9 @@
 <script>
 
 video_array = [
-"test_s0_0001-0100.webm",    //  my_play(0)で再生   サンプルでは開始ボタンで再生
-"test_a1_0100-0130.webm",    //  my_play(1)で再生   サンプルではAボタンで再生
-"test_a2_0100-0130.webm",    //  my_play(2)で再生   サンプルではBボタンで再生，以降追加可能
+"test_s0_0001-0100.webm",    //  setTimeout(my_play, 5000,   0)で再生   サンプルでは開始ボタンで再生
+"test_a1_0100-0130.webm",    //  setTimeout(my_play, 5000,   1)で再生   サンプルではAボタンで再生
+"test_a2_0100-0130.webm",    //  msetTimeout(my_play, 5000,  2)で再生   サンプルではBボタンで再生，以降追加可能
 "dummy"                      // ，以降追加可能
 ]
 
@@ -31,16 +31,16 @@ button_start.addEventListener('click', function() {
 	setTimeout(delete_text_left, 0);   //文字削除　左側
 	setTimeout(delete_text_right, 0);  //文字削除　右側
 	
-	setTimeout(text_main, 0, "質問があるので，指示にしたがって回答ください"); // 0秒後に上部に説明を表示
+	setTimeout(text_main, 0, "はじめのテストのメッセージを表示。こんにちわ"); // 0秒後に上部に説明を表示
 
-	setTimeout(delete_text_main, 2000);   //文字削除　上部 2000ミリ秒後（2秒後）
+	setTimeout(delete_text_main, 3000);   //文字削除　上部 2000ミリ秒後（2秒後）
 
-	setTimeout(my_play, 3000,    0); // video_arrayにある動画の0番目を再生   3000ミリ秒後（3秒後）
+	setTimeout(my_play, 5000,    0); // video_arrayにある動画の0番目を再生   3000ミリ秒後（3秒後）
 
-	setTimeout(text_left, 3500, "えと鈴木さん？",10,10);  // 3500ミリ秒後に　左側にセリフを表示，X座標Y座標も数値で指定可
-	setTimeout(text_right, 4000, "えーと",10,10);        // 4000ミリ秒後に　左側にセリフを表示，X座標Y座標も数値で指定可
+	setTimeout(text_left, 5500, "えと鈴木さん？[br]間違いない[br]ですか？",10,10);  // 5500ミリ秒後に　左側にセリフを表示，X座標Y座標も数値で指定可
+	setTimeout(text_right, 6000, "えーと",10,10);        // 6000ミリ秒後に　左側にセリフを表示，X座標Y座標も数値で指定可
 	
-	setTimeout(text_main, 4500, "Aはい [br]Bいいえ [br]を選択してください"); // 4500ミリ秒後に上部に説明を表示
+	setTimeout(text_main, 10000, "Aはい [br]Bいいえ [br]を選択してください"); // 10000ミリ秒後に上部に説明を表示
 	// text_mainは[br]を書くことで，改行がされます
 
 });
@@ -103,59 +103,61 @@ button_d.addEventListener('click', function() {
 
 
 	canvas_main = document.createElement('canvas');
-	canvas_main.width = 1150;
-	canvas_main.height = 390;
+	canvas_main.width = 760;  
+	canvas_main.height = 300;
 //	canvas_main.style.border = 'solid black 1px';
 	canvas_main.style.position = "absolute";
-	canvas_main.style.left = "35px";
-	canvas_main.style.top  = "50px";
+	canvas_main.style.left = "20px";
+	canvas_main.style.top  = "20px";
 	document.body.appendChild(canvas_main);
 
 	context_main = canvas_main.getContext('2d');
+	context_main.beginPath();
+	context_main.fillStyle = "rgba(" + [250, 250, 250, 0.75] + ")"; // 半透明描画
+	context_main.fillRect(1, 1, 760, 300); 
+	
 	context_main.fillStyle     =  "orange";
-	context_main.font          =  "18px 'ＭＳ Ｐゴシック'";
+	context_main.font          =  "24px 'ＭＳ Ｐゴシック'";
 	context_main.textAlign     =  "left";
 	context_main.textBaseline  =  "top";
 	//	context_w.fillText("テスト文字列", 10, 10);
 
-
 	canvas_left = document.createElement('canvas');
-	canvas_left.width = 550;
-	canvas_left.height = 100;
+	canvas_left.width = 360;
+	canvas_left.height = 120;
 //	canvas_left.style.border = 'solid orange 1px';
 	canvas_left.style.position = "absolute";
-	canvas_left.style.left = "25px";
-	canvas_left.style.top  = "530px";
+	canvas_left.style.left = "20px";
+	canvas_left.style.top  = "320px";
 	document.body.appendChild(canvas_left);
 
 	context_left = canvas_left.getContext('2d');
 	context_left.beginPath();
 	context_left.fillStyle = "rgba(" + [250, 250, 250, 0.75] + ")"; // 半透明描画
-	context_left.fillRect(1, 1, 750, 100); 
+	context_left.fillRect(1, 1, 360, 120); 
 
 	context_left.fillStyle     =  "black";
-	context_left.font          =  "35px 'ＭＳ Ｐゴシック'";
+	context_left.font          =  "24px 'ＭＳ Ｐゴシック'";
 	context_left.textAlign     =  "left";
 	context_left.textBaseline  =  "top";
 //	context_left.fillText("テスト文字列", 10, 10);
 
-
 	canvas_right = document.createElement('canvas');
-	canvas_right.width = 550;
-	canvas_right.height = 100;
+	canvas_right.width = 360;
+	canvas_right.height = 120;
 //	canvas_right.style.border = 'solid orange 1px';
 	canvas_right.style.position = "absolute";
-	canvas_right.style.left = "625px";
-	canvas_right.style.top  = "530px";
+	canvas_right.style.left = "420px";
+	canvas_right.style.top  = "320px";
 	document.body.appendChild(canvas_right);
 
 	context_right = canvas_right.getContext('2d');
 	context_right.beginPath();
 	context_right.fillStyle = "rgba(" + [250, 250, 250, 0.75] + ")"; // 半透明描画
-	context_right.fillRect(1, 1, 750, 100);
+	context_right.fillRect(1, 1, 450, 120);
 
 	context_right.fillStyle     =  "black";
-	context_right.font          =  "35px 'ＭＳ Ｐゴシック'";
+	context_right.font          =  "24px 'ＭＳ Ｐゴシック'";
 	context_right.textAlign     =  "left";
 	context_right.textBaseline  =  "top";
 //	context_right.fillText("テスト文字列", 10, 10);
@@ -168,31 +170,65 @@ button_d.addEventListener('click', function() {
 
 
 
-function text_left(str,p1,p2){ 
+function text_left(text,p1,p2){ 
 	context_left.beginPath();
 	context_left.fillStyle = "rgba(" + [250, 250, 250, 0.75] + ")"; // 半透明描画
-	context_left.fillRect(1, 1, 750, 100); 
+	context_left.fillRect(1, 1,  360, 120); 
 
 	context_left.fillStyle     =  "black";
-	context_left.fillText(str,p1,p2);
+//	context_left.fillText(str,p1,p2);
+
+	var fontSize = 24 ;	// フォントサイズ
+	var lineHeight = 1.1618 ;	// 行の高さ (フォントサイズに対する倍率)
+	var x = p1 ;	// 水平位置
+	var y = p2 ;	// 垂直位置
+
+	var lines = text.split("[br]"); //[br]を改行のしるしにする．
+
+	for( i=0; i < lines.length ; i++ ) {
+		var line = lines[i] ;
+		var addY = 0;//fontSize ;
+		// 2行目以降の水平位置は行数とlineHeightを考慮する
+		if ( i ) addY += fontSize * lineHeight * i ;
+		context_left.fillText( line, x + 0, y + addY ) ;
+	}
+
 }
 
-function text_right(str,p1,p2){ 
+
+
+function text_right(text,p1,p2){ 
 	context_right.beginPath();
 	context_right.fillStyle = "rgba(" + [250, 250, 250, 0.75] + ")"; // 半透明描画
-	context_right.fillRect(1, 1, 750, 100); 
+	context_right.fillRect(1, 1,  360, 120); 
 
 	context_right.fillStyle     =  "black";
-	context_right.fillText(str,p1,p2);
+//	context_right.fillText(str,p1,p2);
+
+	var fontSize = 24 ;	// フォントサイズ
+	var lineHeight = 1.1618 ;	// 行の高さ (フォントサイズに対する倍率)
+	var x = p1 ;	// 水平位置
+	var y = p2 ;	// 垂直位置
+
+	var lines = text.split("[br]"); //[br]を改行のしるしにする．
+
+	for( i=0; i < lines.length ; i++ ) {
+		var line = lines[i] ;
+		var addY = 0;//fontSize ;
+		// 2行目以降の水平位置は行数とlineHeightを考慮する
+		if ( i ) addY += fontSize * lineHeight * i ;
+		context_right.fillText( line, x + 0, y + addY ) ;
+	}
+
 }
 
 
 function delete_text_left(){	// 削除
-	context_left.clearRect(0, 0,750, 100);
+	context_left.clearRect(0, 0, 360, 120); 
 }
 
 function delete_text_right(){	// 削除
-	context_right.clearRect(0, 0,750, 100);
+	context_right.clearRect(0, 0, 360, 120); 
 }
 
 
@@ -206,29 +242,29 @@ function my_play(number){
 
 function delete_text_main(){
 	// 説明部分の削除
-	context_main.clearRect(0, 0,1150,390);
+	context_main.clearRect(0, 0,760, 300); 
 }
 
 function text_main(situation){
 
 	// 説明部分の削除
-	context_main.clearRect(0, 0,1150,390);
+	context_main.clearRect(0, 0,760, 300); 
 
 	context_main.beginPath();
 	context_main.fillStyle = "rgba(" + [250, 250, 250, 0.75] + ")";
-	context_main.fillRect(1, 1, 1150, 390); 
+	context_main.fillRect(1, 1, 760, 300); 
 	// 半透明描画
 
 	context_main.fillStyle     =  "blue";
-	context_main.rect(0, 0, 1150, 390); 
+	context_main.rect(0, 0, 760, 300); 
 	context_main.stroke();
 
 	text = situation;
 
-	var fontSize = 40 ;	// フォントサイズ
+	var fontSize = 30 ;	// フォントサイズ
 	var lineHeight = 1.1618 ;	// 行の高さ (フォントサイズに対する倍率)
-	var x = 50 ;	// 水平位置
-	var y = 50 ;	// 垂直位置
+	var x = 10 ;	// 水平位置
+	var y = 10 ;	// 垂直位置
 
 	context_main.beginPath () ;
 
@@ -240,7 +276,7 @@ function text_main(situation){
 
 	for( i=0; i < lines.length ; i++ ) {
 		var line = lines[i] ;
-		var addY = fontSize ;
+		var addY = 0;// fontSize ;
 		// 2行目以降の水平位置は行数とlineHeightを考慮する
 		if ( i ) addY += fontSize * lineHeight * i ;
 		context_main.fillText( line, x + 0, y + addY ) ;
@@ -255,13 +291,12 @@ function text_main(situation){
 
 </script>
 
-<body>
+<body bgcolor="#dddddd">
 
-<video id="video_src"   muted    width="1200"   height="675">
+<video id="video_src"   muted    width="800"   height="450" >
 <source   type="video/webm">
 </video>
 
-<br />
 <br />
 
 <input id="button_start"    type="button" value="開始" style="font:20pt MS ゴシック; font-weight: bold;"  >
